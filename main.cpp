@@ -3,6 +3,8 @@
 using namespace std;
 
 
+
+
 int main() {
 
     string banner1 = "  _______    _______        __       ________    _______  _______     ______      ______    __   ___  ";
@@ -28,12 +30,56 @@ int main() {
 
     switch(choise){
         case 1:
-            
+struct Question {
+    string text;
+    vector<string> options;
+    int correct;
+};
+
+void askQuestion(const Question& q, int& score) {
+    int answer;
+    cout << q.text <<endl;
+    for (size_t i = 0; i < q.options.size(); i++) {
+        cout << i + 1 << ". " << q.options[i] << endl;
+    }
+    cout << "Your answer: ";
+    cin >> answer;
+
+    if (answer - 1 == q.correct)
+    {
+        score++;
+    }
+}
+
+vector<Question> generateQuestions() {
+    return {
+         {"Molly used to ... watching \n cartoons when she was young.",
+        {"a) loving",
+        "b) loved",
+        "c) love",
+        "d) have love"},
+        2},
+    };
+    };
+
+
+int main() {
+    int score = 0;
+    auto questions = generateQuestions();
+
+    for (int i = 0; i < 3; i++)
+    {
+        askQuestion(questions[i], score);
+    }
+
+    cout << endl << "Score: " << score <<endl;
+}
+
 
         break;
 
         case 2:
-                //view all students
+                
         break;
 
         
