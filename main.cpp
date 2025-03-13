@@ -23,16 +23,6 @@ void askQuestion(const Question& q, int& score) {
     }
 }
 
-vector<Question> generateQuestions() {
-    return {
-         {"Molly used to ... watching \n cartoons when she was young.",
-        {"a) loving",
-        "b) loved",
-        "c) love",
-        "d) have love"},
-        2},
-    };
-    };
 
 
 
@@ -71,6 +61,17 @@ int main() {
     {
         askQuestion(questions[i], score);
     }
+
+    vector<Question> generateQuestions() {
+        return {
+             {"Molly used to ... watching \n cartoons when she was young.",
+            {"a) loving",
+            "b) loved",
+            "c) love",
+            "d) have love"},
+            2},
+        };
+        };
 
     cout << endl << "Score: " << score <<endl;
 
