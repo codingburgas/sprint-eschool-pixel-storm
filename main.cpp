@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 #include <vector>
 using namespace std;
 
@@ -34,7 +34,57 @@ vector<Question> generateQuestions() {
     };
 };
 
-
+void spanishExam() {
+    Question questions[MAXQUESTIONS] = {
+        {"¿Cuál es la capital de España?",
+         {"a) Barcelona", "b) Madrid", "c) Sevilla", "d) Valencia"}, 1},
+        {"¿Cuántos colores tiene la bandera de México?",
+         {"a) Dos", "b) Tres", "c) Cuatro", "d) Uno"}, 1},
+        {"¿Quién escribió 'Don Quijote de la Mancha'?",
+         {"a) Gabriel García Márquez", "b) Miguel de Cervantes", "c) Pablo Neruda", "d) Federico García Lorca"}, 1},
+        {"¿En qué continente se encuentra Argentina?",
+         {"a) Asia", "b) Europa", "c) América", "d) África"}, 2},
+        {"¿Cuál es el idioma oficial de Brasil?",
+         {"a) Español", "b) Inglés", "c) Portugués", "d) Francés"}, 2}
+    };
+    int count = 1;
+    int currentQuestion = GetRandomValue(0, 4);
+    int selectedOption = -1;
+    bool answered = false;
+    int score = 0;
+    EnableCursor();
+    while (!WindowShouldClose()) {
+        if (!answered) {
+            for (int i = 0; i < MAXOPTIONS; i++) {
+                if (CheckMouseClickOnOption(i, GetMouseY())) {
+                    selectedOption = i;
+                    break;
+                }
+            }
+            if (selectedOption >= 0) {
+                if (selectedOption == questions[currentQuestion].correctOption) {
+                    score++;
+                }
+                answered = true;
+                count++;
+            }
+        }
+        if (answered && IsKeyPressed(KEY_ENTER)) {
+            currentQuestion = GetRandomValue(0, 4);
+            selectedOption = -1;
+            answered = false;
+        }
+        if (count >= 10) {
+            string subject = "spanish";
+            DataAccess accessData;
+            int grade = gradeSystem(score);
+            accessData.addGrade(subject, to_string(grade));
+            spanish();
+            break;
+        }
+        SetExitKey(KEY_APOSTROPHE);
+    }
+}
 
 
 
