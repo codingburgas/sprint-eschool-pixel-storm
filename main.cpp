@@ -10,7 +10,7 @@ struct Question {
 
 void askQuestion(const Question& q, int& score) {
     int answer;
-    cout << q.text <<endl;
+    cout << q.text << endl;
     for (size_t i = 0; i < q.options.size(); i++) {
         cout << i + 1 << ". " << q.options[i] << endl;
     }
@@ -23,6 +23,16 @@ void askQuestion(const Question& q, int& score) {
     }
 }
 
+vector<Question> generateQuestions() {
+    return {
+         {"Molly used to ... watching \n cartoons when she was young.",
+        {"a) loving",
+        "b) loved",
+        "c) love",
+        "d) have love"},
+        2},
+    };
+};
 
 
 
@@ -51,44 +61,77 @@ int main() {
     int choise;
     cin >> choise;
 
-    switch(choise){
-        case 1:
+    switch (choise) {
+    case 1:
+        cout << "Enter your choice!" << endl;
+        cout << "1.English" << endl;
+        cout << "2.German" << endl;
+        cout << "3.Spanish" << endl;
+        cout << "4.Exit" << endl;
 
-    int score = 0;
-    auto questions = generateQuestions();
+        int languagechoice;
+        cin >> languagechoice;
 
-    for (int i = 0; i < 3; i++)
-    {
-        askQuestion(questions[i], score);
-    }
+        switch (languagechoice) {
+        case 1: {
+            int score = 0;
+            auto questions = generateQuestions();
 
-    vector<Question> generateQuestions() {
-        return {
-             {"Molly used to ... watching \n cartoons when she was young.",
-            {"a) loving",
-            "b) loved",
-            "c) love",
-            "d) have love"},
-            2},
-        };
-        };
+            for (int i = 0; i < questions.size(); i++) 
+            {
+                askQuestion(questions[i], score);
+            }
 
-    cout << endl << "Score: " << score <<endl;
-
-
-
-        break;
-
+            cout << endl << "Score: " << score << endl;
+            break;
+        }
         case 2:
-                
-        break;
+        {
+            int score = 0;
+            auto questions = generateQuestions();
 
-        
+            for (int i = 0; i < questions.size(); i++)
+            {
+                askQuestion(questions[i], score);
+            }
+
+            cout << endl << "Score: " << score << endl;
+            break;
+        }
+            break;
         case 3:
+        {
+            int score = 0;
+            auto questions = generateQuestions();
+
+            for (int i = 0; i < questions.size(); i++)
+            {
+                askQuestion(questions[i], score);
+            }
+
+            cout << endl << "Score: " << score << endl;
+            break;
+        }
+            break;
+        case 4:
             return 0;
+        default:
+            cout << "Invalid choice!" << endl;
+        }
+       
+
         break;
 
-        default:
+    case 2:
+
+        break;
+
+
+    case 3:
+        return 0;
+        break;
+
+    default:
         cout << "Invalid option!";
         break;
     }
