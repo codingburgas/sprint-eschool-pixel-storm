@@ -8,7 +8,7 @@ struct Question {
     int correct;
 };
 
-void askQuestion(const Question& q, int& score) {
+void askQuestion(Question q, int score) {
     int answer;
     cout << q.text << endl;
     for (size_t i = 0; i < q.options.size(); i++) {
@@ -23,122 +23,9 @@ void askQuestion(const Question& q, int& score) {
     }
 }
 
-vector<Question> generateQuestions() {
-    return {
-         {"Molly used to ... watching \n cartoons when she was young.",
-        {"a) loving",
-        "b) loved",
-        "c) love",
-        "d) have love"},
-        2},
-    };
-};
-
-void spanishExam() {
-    Question questions[MAXQUESTIONS] = {
-        {"¿Cuál es la capital de España?",
-         {"a) Barcelona", "b) Madrid", "c) Sevilla", "d) Valencia"}, 1},
-        {"¿Cuántos colores tiene la bandera de México?",
-         {"a) Dos", "b) Tres", "c) Cuatro", "d) Uno"}, 1},
-        {"¿Quién escribió 'Don Quijote de la Mancha'?",
-         {"a) Gabriel García Márquez", "b) Miguel de Cervantes", "c) Pablo Neruda", "d) Federico García Lorca"}, 1},
-        {"¿En qué continente se encuentra Argentina?",
-         {"a) Asia", "b) Europa", "c) América", "d) África"}, 2},
-        {"¿Cuál es el idioma oficial de Brasil?",
-         {"a) Español", "b) Inglés", "c) Portugués", "d) Francés"}, 2},
-        {"¿Cuál es el río más largo del mundo?",
-         {"a) Amazonas", "b) Nilo", "c) Yangtsé", "d) Misisipi"}, 1},
-        {"¿En qué año llegó Cristóbal Colón a América?",
-         {"a) 1492", "b) 1519", "c) 1776", "d) 1600"}, 0},
-        {"¿Cuál es el planeta más grande del sistema solar?",
-         {"a) Marte", "b) Júpiter", "c) Saturno", "d) Neptuno"}, 1},
-        {"¿Quién pintó la Mona Lisa?",
-         {"a) Miguel Ángel", "b) Van Gogh", "c) Leonardo da Vinci", "d) Rembrandt"}, 2},
-        {"¿Qué instrumento se asocia con Mozart?",
-         {"a) Guitarra", "b) Violín", "c) Piano", "d) Trompeta"}, 2},
-        {"¿Cuál es el símbolo químico del agua?",
-         {"a) H2O", "b) CO2", "c) O2", "d) NH3"}, 0},
-        {"¿En qué país se encuentra la Torre Eiffel?",
-         {"a) Alemania", "b) Italia", "c) Francia", "d) España"}, 2},
-        {"¿Cuál es el metal más ligero?",
-         {"a) Aluminio", "b) Litio", "c) Hierro", "d) Cobre"}, 1},
-        {"¿Cuál es el océano más grande del mundo?",
-         {"a) Atlántico", "b) Índico", "c) Pacífico", "d) Ártico"}, 2},
-        {"¿Quién fue el primer presidente de los Estados Unidos?",
-         {"a) Abraham Lincoln", "b) George Washington", "c) Thomas Jefferson", "d) John Adams"}, 1},
-        {"¿Qué gas respiran los seres humanos principalmente?",
-         {"a) Oxígeno", "b) Nitrógeno", "c) Dióxido de carbono", "d) Hidrógeno"}, 0},
-        {"¿Cuántos huesos tiene el cuerpo humano adulto?",
-         {"a) 206", "b) 195", "c) 220", "d) 250"}, 0},
-        {"¿Cuál es la moneda oficial de Japón?",
-         {"a) Yuan", "b) Peso", "c) Yen", "d) Dólar"}, 2},
-        {"¿Cuál es el país con mayor población del mundo?",
-         {"a) China", "b) India", "c) Estados Unidos", "d) Rusia"}, 0},
-        {"¿Cuál es el animal terrestre más rápido?",
-         {"a) Guepardo", "b) León", "c) Antílope", "d) Canguro"}, 0},
-        {"¿Qué país es famoso por el tango?",
-         {"a) España", "b) Argentina", "c) México", "d) Brasil"}, 1},
-        {"¿Cuál es el hueso más largo del cuerpo humano?",
-         {"a) Tibia", "b) Fémur", "c) Radio", "d) Húmero"}, 1},
-        {"¿En qué año comenzó la Segunda Guerra Mundial?",
-         {"a) 1939", "b) 1945", "c) 1914", "d) 1925"}, 0},
-        {"¿Cuál es el símbolo químico del oro?",
-         {"a) Au", "b) Ag", "c) Pb", "d) Fe"}, 0},
-        {"¿Cuál es el resultado de 8 × 7?",
-         {"a) 56", "b) 64", "c) 49", "d) 72"}, 0},
-        {"¿Cuál es el idioma más hablado en el mundo?",
-         {"a) Español", "b) Inglés", "c) Mandarín", "d) Árabe"}, 2},
-        {"¿Quién fue el primer hombre en pisar la Luna?",
-         {"a) Buzz Aldrin", "b) Neil Armstrong", "c) Yuri Gagarin", "d) Michael Collins"}, 1},
-        {"¿Cuál es la capital de Italia?",
-         {"a) Milán", "b) Roma", "c) Venecia", "d) Nápoles"}, 1},
-        {"¿Cuál es el desierto más grande del mundo?",
-         {"a) Sahara", "b) Kalahari", "c) Gobi", "d) Atacama"}, 0},
-        {"¿Qué gas es conocido como 'gas de la risa'?",
-         {"a) Oxígeno", "b) Helio", "c) Nitrógeno", "d) Óxido nitroso"}, 3}
-    };    
-    int count = 1;
-    int currentQuestion = GetRandomValue(0, 4);
-    int selectedOption = -1;
-    bool answered = false;
-    int score = 0;
-    EnableCursor();
-    while (!WindowShouldClose()) {
-        if (!answered) {
-            for (int i = 0; i < MAXOPTIONS; i++) {
-                if (CheckMouseClickOnOption(i, GetMouseY())) {
-                    selectedOption = i;
-                    break;
-                }
-            }
-            if (selectedOption >= 0) {
-                if (selectedOption == questions[currentQuestion].correctOption) {
-                    score++;
-                }
-                answered = true;
-                count++;
-            }
-        }
-        if (answered && IsKeyPressed(KEY_ENTER)) {
-            currentQuestion = GetRandomValue(0, 4);
-            selectedOption = -1;
-            answered = false;
-        }
-        if (count >= 10) {
-            string subject = "spanish";
-            DataAccess accessData;
-            int grade = gradeSystem(score);
-            accessData.addGrade(subject, to_string(grade));
-            spanish();
-            break;
-        }
-        SetExitKey(KEY_APOSTROPHE);
-    }
-}
-
-void englishExam() {
-    Question questions[MAXQUESTIONS] = {
-        {"What is the capital of Spain?",
+vector<Question> englishExam() {
+    vector<Question> questions = {
+         {"What is the capital of Spain?",
          {"a) Barcelona", "b) Madrid", "c) Seville", "d) Valencia"}, 1},
         {"How many colors does the Mexican flag have?",
          {"a) Two", "b) Three", "c) Four", "d) One"}, 1},
@@ -199,49 +86,10 @@ void englishExam() {
         {"Which gas is known as 'laughing gas'?",
          {"a) Oxygen", "b) Helium", "c) Nitrogen", "d) Nitrous oxide"}, 3}
     };
-    
-    int count = 1;
-    int currentQuestion = GetRandomValue(0, 4);
-    int selectedOption = -1;
-    bool answered = false;
-    int score = 0;
-    EnableCursor();
-    while (!WindowShouldClose()) {
-        if (!answered) {
-            for (int i = 0; i < MAXOPTIONS; i++) {
-                if (CheckMouseClickOnOption(i, GetMouseY())) {
-                    selectedOption = i;
-                    break;
-                }
-            }
-            if (selectedOption >= 0) {
-                if (selectedOption == questions[currentQuestion].correctOption) {
-                    score++;
-                }
-                answered = true;
-                count++;
-            }
-        }
-        if (answered && IsKeyPressed(KEY_ENTER)) {
-            currentQuestion = GetRandomValue(0, 4);
-            selectedOption = -1;
-            answered = false;
-        }
-        if (count >= 10) {
-            string subject = "english";
-            DataAccess accessData;
-            int grade = gradeSystem(score);
-            accessData.addGrade(subject, to_string(grade));
-            english();
-            break;
-        }
-        SetExitKey(KEY_APOSTROPHE);
-    }
-}
-
-void deutschExam() {
-    Question questions[MAXQUESTIONS] = {
-        {"Was ist die Hauptstadt von Spanien?",
+};
+vector<Question> deutschExam() {
+    vector<Question> questions = {
+          {"Was ist die Hauptstadt von Spanien?",
          {"a) Barcelona", "b) Madrid", "c) Sevilla", "d) Valencia"}, 1},
         {"Wie viele Farben hat die mexikanische Flagge?",
          {"a) Zwei", "b) Drei", "c) Vier", "d) Eine"}, 1},
@@ -302,44 +150,72 @@ void deutschExam() {
         {"Welches Gas ist als Lachgas bekannt?",
          {"a) Sauerstoff", "b) Helium", "c) Stickstoff", "d) Distickstoffoxid"}, 3}
     };
-        
-    int count = 1;
-    int currentQuestion = GetRandomValue(0, 4);
-    int selectedOption = -1;
-    bool answered = false;
-    int score = 0;
-    EnableCursor();
-    while (!WindowShouldClose()) {
-        if (!answered) {
-            for (int i = 0; i < MAXOPTIONS; i++) {
-                if (CheckMouseClickOnOption(i, GetMouseY())) {
-                    selectedOption = i;
-                    break;
-                }
-            }
-            if (selectedOption >= 0) {
-                if (selectedOption == questions[currentQuestion].correctOption) {
-                    score++;
-                }
-                answered = true;
-                count++;
-            }
-        }
-        if (answered && IsKeyPressed(KEY_ENTER)) {
-            currentQuestion = GetRandomValue(0, 4);
-            selectedOption = -1;
-            answered = false;
-        }
-        if (count >= 10) {
-            string subject = "deutsch";
-            DataAccess accessData;
-            int grade = gradeSystem(score);
-            accessData.addGrade(subject, to_string(grade));
-            deutsch();
-            break;
-        }
-        SetExitKey(KEY_APOSTROPHE);
-    }
+};
+vector<Question>spanishExam() {
+    vector<Question> questions = {
+       {"¿Cuál es la capital de España?",
+         {"a) Barcelona", "b) Madrid", "c) Sevilla", "d) Valencia"}, 1},
+        {"¿Cuántos colores tiene la bandera de México?",
+         {"a) Dos", "b) Tres", "c) Cuatro", "d) Uno"}, 1},
+        {"¿Quién escribió 'Don Quijote de la Mancha'?",
+         {"a) Gabriel García Márquez", "b) Miguel de Cervantes", "c) Pablo Neruda", "d) Federico García Lorca"}, 1},
+        {"¿En qué continente se encuentra Argentina?",
+         {"a) Asia", "b) Europa", "c) América", "d) África"}, 2},
+        {"¿Cuál es el idioma oficial de Brasil?",
+         {"a) Español", "b) Inglés", "c) Portugués", "d) Francés"}, 2},
+        {"¿Cuál es el río más largo del mundo?",
+         {"a) Amazonas", "b) Nilo", "c) Yangtsé", "d) Misisipi"}, 1},
+        {"¿En qué año llegó Cristóbal Colón a América?",
+         {"a) 1492", "b) 1519", "c) 1776", "d) 1600"}, 0},
+        {"¿Cuál es el planeta más grande del sistema solar?",
+         {"a) Marte", "b) Júpiter", "c) Saturno", "d) Neptuno"}, 1},
+        {"¿Quién pintó la Mona Lisa?",
+         {"a) Miguel Ángel", "b) Van Gogh", "c) Leonardo da Vinci", "d) Rembrandt"}, 2},
+        {"¿Qué instrumento se asocia con Mozart?",
+         {"a) Guitarra", "b) Violín", "c) Piano", "d) Trompeta"}, 2},
+        {"¿Cuál es el símbolo químico del agua?",
+         {"a) H2O", "b) CO2", "c) O2", "d) NH3"}, 0},
+        {"¿En qué país se encuentra la Torre Eiffel?",
+         {"a) Alemania", "b) Italia", "c) Francia", "d) España"}, 2},
+        {"¿Cuál es el metal más ligero?",
+         {"a) Aluminio", "b) Litio", "c) Hierro", "d) Cobre"}, 1},
+        {"¿Cuál es el océano más grande del mundo?",
+         {"a) Atlántico", "b) Índico", "c) Pacífico", "d) Ártico"}, 2},
+        {"¿Quién fue el primer presidente de los Estados Unidos?",
+         {"a) Abraham Lincoln", "b) George Washington", "c) Thomas Jefferson", "d) John Adams"}, 1},
+        {"¿Qué gas respiran los seres humanos principalmente?",
+         {"a) Oxígeno", "b) Nitrógeno", "c) Dióxido de carbono", "d) Hidrógeno"}, 0},
+        {"¿Cuántos huesos tiene el cuerpo humano adulto?",
+         {"a) 206", "b) 195", "c) 220", "d) 250"}, 0},
+        {"¿Cuál es la moneda oficial de Japón?",
+         {"a) Yuan", "b) Peso", "c) Yen", "d) Dólar"}, 2},
+        {"¿Cuál es el país con mayor población del mundo?",
+         {"a) China", "b) India", "c) Estados Unidos", "d) Rusia"}, 0},
+        {"¿Cuál es el animal terrestre más rápido?",
+         {"a) Guepardo", "b) León", "c) Antílope", "d) Canguro"}, 0},
+        {"¿Qué país es famoso por el tango?",
+         {"a) España", "b) Argentina", "c) México", "d) Brasil"}, 1},
+        {"¿Cuál es el hueso más largo del cuerpo humano?",
+         {"a) Tibia", "b) Fémur", "c) Radio", "d) Húmero"}, 1},
+        {"¿En qué año comenzó la Segunda Guerra Mundial?",
+         {"a) 1939", "b) 1945", "c) 1914", "d) 1925"}, 0},
+        {"¿Cuál es el símbolo químico del oro?",
+         {"a) Au", "b) Ag", "c) Pb", "d) Fe"}, 0},
+        {"¿Cuál es el resultado de 8 × 7?",
+         {"a) 56", "b) 64", "c) 49", "d) 72"}, 0},
+        {"¿Cuál es el idioma más hablado en el mundo?",
+         {"a) Español", "b) Inglés", "c) Mandarín", "d) Árabe"}, 2},
+        {"¿Quién fue el primer hombre en pisar la Luna?",
+         {"a) Buzz Aldrin", "b) Neil Armstrong", "c) Yuri Gagarin", "d) Michael Collins"}, 1},
+        {"¿Cuál es la capital de Italia?",
+         {"a) Milán", "b) Roma", "c) Venecia", "d) Nápoles"}, 1},
+        {"¿Cuál es el desierto más grande del mundo?",
+         {"a) Sahara", "b) Kalahari", "c) Gobi", "d) Atacama"}, 0},
+        {"¿Qué gas es conocido como 'gas de la risa'?",
+         {"a) Oxígeno", "b) Helio", "c) Nitrógeno", "d) Óxido nitroso"}, 3}
+    };
+
+
 }
 
 
@@ -355,7 +231,7 @@ int main() {
     string banner7 = " \_______) |__|  \___)(___/    \___)(________/  \_______)(_______/  \'_____/    \'_____/   (__|  \__) ";
     string banner8 = "                                                                                                      ";
 
-    cout << banner1 << endl << banner2 << endl << banner3 << endl << banner4 << endl << banner5 << banner6 << endl << banner7 << endl << banner8;
+    cout << endl <<  banner1 << endl <<  banner2 << endl << banner3 << endl << banner4 <<  endl << banner5 <<  banner6 << endl << banner7 << endl << banner8;
 
 
     cout << "Enter your choice!" << endl;
@@ -381,9 +257,9 @@ int main() {
         switch (languagechoice) {
         case 1: {
             int score = 0;
-            auto questions = generateQuestions();
+            auto questions = englishExam();
 
-            for (int i = 0; i < questions.size(); i++) 
+            for (int i = 0; i < questions.size(); i++)
             {
                 askQuestion(questions[i], score);
             }
@@ -394,7 +270,7 @@ int main() {
         case 2:
         {
             int score = 0;
-            auto questions = generateQuestions();
+            auto questions = deutschExam();
 
             for (int i = 0; i < questions.size(); i++)
             {
@@ -404,11 +280,11 @@ int main() {
             cout << endl << "Score: " << score << endl;
             break;
         }
-            break;
+        break;
         case 3:
         {
             int score = 0;
-            auto questions = generateQuestions();
+            auto questions = spanishExam();
 
             for (int i = 0; i < questions.size(); i++)
             {
@@ -418,13 +294,13 @@ int main() {
             cout << endl << "Score: " << score << endl;
             break;
         }
-            break;
+        break;
         case 4:
             return 0;
         default:
             cout << "Invalid choice!" << endl;
         }
-       
+
 
         break;
 
