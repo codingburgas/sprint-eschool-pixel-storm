@@ -24,7 +24,7 @@ void askQuestion(Question q, int score) {
 }
 
 vector<Question> englishExam() {
-    vector<Question> questions = {
+    return {
          {"What is the capital of Spain?",
          {"a) Barcelona", "b) Madrid", "c) Seville", "d) Valencia"}, 1},
         {"How many colors does the Mexican flag have?",
@@ -88,7 +88,7 @@ vector<Question> englishExam() {
     };
 };
 vector<Question> deutschExam() {
-    vector<Question> questions = {
+    return {
           {"Was ist die Hauptstadt von Spanien?",
          {"a) Barcelona", "b) Madrid", "c) Sevilla", "d) Valencia"}, 1},
         {"Wie viele Farben hat die mexikanische Flagge?",
@@ -152,7 +152,7 @@ vector<Question> deutschExam() {
     };
 };
 vector<Question>spanishExam() {
-    vector<Question> questions = {
+    return {
        {"¿Cuál es la capital de España?",
          {"a) Barcelona", "b) Madrid", "c) Sevilla", "d) Valencia"}, 1},
         {"¿Cuántos colores tiene la bandera de México?",
@@ -231,7 +231,7 @@ int main() {
     string banner7 = " \_______) |__|  \___)(___/    \___)(________/  \_______)(_______/  \'_____/    \'_____/   (__|  \__) ";
     string banner8 = "                                                                                                      ";
 
-    cout << endl <<  banner1 << endl <<  banner2 << endl << banner3 << endl << banner4 <<  endl << banner5 <<  banner6 << endl << banner7 << endl << banner8;
+    cout << endl << banner1 << endl << banner2 << endl << banner3 << endl << banner4 << endl << banner5 << banner6 << endl << banner7 << endl << banner8;
 
 
     cout << "Enter your choice!" << endl;
