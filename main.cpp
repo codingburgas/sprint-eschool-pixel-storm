@@ -23,6 +23,7 @@ void askQuestion(Question q, int score) {
     }
 }
 
+
 vector<Question> englishExam() {
     return {
          {"What is the capital of Spain?",
@@ -218,7 +219,7 @@ vector<Question>spanishExam() {
 
 }
 
-void displayBanner() 
+void displayBanner()
 {
     cout << "   ___ _          _   __ _                       " << endl;
     cout << "  / _ (_)_  _____| | / _\\ |_ ___  _ __ _ __ ___  " << endl;
@@ -230,7 +231,10 @@ void displayBanner()
 int main() {
     displayBanner();
 
-  
+    vector<int> gradesEnglish;
+    vector<int> gradesDeutsch;
+    vector<int> gradesSpanish;
+
 
 
     cout << "Enter your choice!" << endl;
@@ -264,6 +268,11 @@ int main() {
             }
 
             cout << endl << "Score: " << score << endl;
+
+            vector<int> gradesEnglish;
+
+            gradesEnglish.push_back(score);
+
             break;
         }
         case 2:
@@ -277,6 +286,11 @@ int main() {
             }
 
             cout << endl << "Score: " << score << endl;
+
+            vector<int> gradesDeutsch;
+
+            gradesDeutsch.push_back(score);
+
             break;
         }
         break;
@@ -291,6 +305,11 @@ int main() {
             }
 
             cout << endl << "Score: " << score << endl;
+
+            vector<int> gradesSpanish;
+
+            gradesSpanish.push_back(score);
+
             break;
         }
         break;
@@ -305,7 +324,90 @@ int main() {
 
     case 2:
 
-        break;
+        cout << "Choose which subject do you want to review\n 1.English\n 2.Deutsch\n 3.Spanish\n 4.All subjects";
+        int chosenSubject;
+        cin >> chosenSubject;
+
+        switch (chosenSubject) {
+        case 1:
+        {
+            cout << "Your English grades are:";
+
+            for (int i = 0; i < gradesEnglish.size(); i++)
+            {
+                cout << gradesEnglish[i] << " ";
+
+            }
+
+        }
+
+        case 2:
+        {
+            cout << "Your Deutsch grades are:";
+
+            for (int i = 0; i < gradesDeutsch.size(); i++)
+            {
+                cout << gradesDeutsch[i] << " ";
+
+            }
+
+        }
+
+        case 3:
+        {
+            cout << "Your Spanish grades are:";
+
+            for (int i = 0; i < gradesSpanish.size(); i++)
+            {
+                cout << gradesSpanish[i] << " ";
+
+            }
+
+        }
+
+        case 4:
+        {
+            cout << "Your grades are:";
+
+            cout << "English:";
+
+            for (int i = 0; i < gradesEnglish.size(); i++)
+            {
+                cout << gradesEnglish[i] << " ";
+
+            }
+
+            cout << endl;
+
+            cout << "Deutsch:";
+
+            for (int i = 0; i < gradesDeutsch.size(); i++)
+            {
+                cout << gradesDeutsch[i] << " ";
+
+            }
+
+            cout << endl;
+
+            cout << "Spanish:";
+
+            for (int i = 0; i < gradesSpanish.size(); i++)
+            {
+                cout << gradesSpanish[i] << " ";
+
+            }
+
+
+        }
+
+
+
+        default:
+        {
+            break;
+        }
+
+        }
 
 
     case 3:
