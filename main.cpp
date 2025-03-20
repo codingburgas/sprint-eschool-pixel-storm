@@ -247,6 +247,10 @@ int main() {
     cin >> choise;
 
     switch (choise) {
+        cout << "Enter your choice!" << endl;
+        cout << "1.Do a test" << endl;
+        cout << "2.Grade scale" << endl;
+        cout << "3.Exit" << endl;
     case 1:
         cout << "Enter your choice!" << endl;
         cout << "1.English" << endl;
@@ -262,7 +266,7 @@ int main() {
             int score = 0;
             auto questions = englishExam();
 
-            for (int i = 0; i < questions.size(); i++)
+            for (int i = 0; i < 1; i++)
             {
                 askQuestion(questions[i], score);
             }
@@ -272,6 +276,7 @@ int main() {
             vector<int> gradesEnglish;
 
             gradesEnglish.push_back(score);
+            return;
 
             break;
         }
@@ -280,7 +285,7 @@ int main() {
             int score = 0;
             auto questions = deutschExam();
 
-            for (int i = 0; i < questions.size(); i++)
+            for (int i = 0; i < 1; i++)
             {
                 askQuestion(questions[i], score);
             }
@@ -299,7 +304,7 @@ int main() {
             int score = 0;
             auto questions = spanishExam();
 
-            for (int i = 0; i < questions.size(); i++)
+            for (int i = 0; i < 1; i++)
             {
                 askQuestion(questions[i], score);
             }
@@ -309,7 +314,7 @@ int main() {
             vector<int> gradesSpanish;
 
             gradesSpanish.push_back(score);
-
+            
             break;
         }
         break;
