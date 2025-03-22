@@ -1,5 +1,6 @@
 ﻿#include <iostream>
 #include <vector>
+#include <random>
 using namespace std;
 
 struct Question {
@@ -258,17 +259,28 @@ int main() {
         cout << "3.Spanish" << endl;
         cout << "4.Exit" << endl;
 
-        int languagechoice;
-        cin >> languagechoice;
+        int languageChoice;
+        cin >> languageChoice;
 
-        switch (languagechoice) {
+        // Create a random value
+        random_device seed;  // Get a random seed from the device
+        mt19937 gen(seed()); // MT generator
+        uniform_int_distribution<> distrib(1, 30); // Distribution from 1 to 100
+
+        int questionIndex = distrib(gen); // Create a variable with the seed and the limitations set
+
+        switch (languageChoice) {
         case 1: {
             int score = 0;
             auto questions = englishExam();
 
-            for (int i = 0; i < 1; i++)
-            {
-                askQuestion(questions[i], score);
+            if (questionIndex >= 0) {
+
+                for (int i = 0; i < 1; i++)
+                {
+                    askQuestion(questions[questionIndex], score);
+                }
+
             }
 
             cout << endl << "Score: " << score << endl;
