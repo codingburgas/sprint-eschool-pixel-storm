@@ -293,7 +293,6 @@ int main() {
             vector<int> gradesEnglish;
 
             gradesEnglish.push_back(score);
-            return;
 
             break;
         }
