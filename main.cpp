@@ -9,7 +9,7 @@ struct Question {
     int correct;
 };
 
-void askQuestion(Question q, int score) {
+void askQuestion(Question q, int& score) {
     int answer;
     cout << q.text << endl;
     for (size_t i = 0; i < q.options.size(); i++) {
@@ -18,11 +18,15 @@ void askQuestion(Question q, int score) {
     cout << "Your answer: ";
     cin >> answer;
 
-    if (answer - 1 == q.correct)
-    {
+    if (answer - 1 == q.correct) {
+        cout << "Correct!\n";
         score++;
     }
+    else {
+        cout << "Incorrect! The correct answer was " << q.options[q.correct] << ".\n";
+    }
 }
+
 
 
 vector<Question> englishExam() {
@@ -253,6 +257,7 @@ int main() {
         cout << "2.Grade scale" << endl;
         cout << "3.Exit" << endl;
     case 1:
+    {
         cout << "Enter your choice!" << endl;
         cout << "1.English" << endl;
         cout << "2.German" << endl;
@@ -326,21 +331,25 @@ int main() {
             vector<int> gradesSpanish;
 
             gradesSpanish.push_back(score);
-            
+
             break;
         }
         break;
         case 4:
+        {
             return 0;
+        }
         default:
+        {
             cout << "Invalid choice!" << endl;
         }
-
+        }
+    }
 
         break;
 
     case 2:
-
+    {
         cout << "Choose which subject do you want to review\n 1.English\n 2.Deutsch\n 3.Spanish\n 4.All subjects";
         int chosenSubject;
         cin >> chosenSubject;
@@ -426,15 +435,17 @@ int main() {
 
         }
 
-
+    }
     case 3:
+    {
         return 0;
         break;
+    }
 
     default:
         cout << "Invalid option!";
         break;
     }
-
-
+    return 0;
+    
 }
