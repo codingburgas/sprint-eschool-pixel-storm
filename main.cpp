@@ -1,35 +1,33 @@
 ﻿#include <iostream>
 #include <vector>
 #include <random>
-using namespace std;
 
 struct Question {
-    string text;
-    vector<string> options;
+    std::string text;
+    std::vector<std::string> options;
     int correct;
 };
 
 void askQuestion(Question q, int& score) {
     int answer;
-    cout << q.text << endl;
+    std::cout << q.text << std::endl;
     for (size_t i = 0; i < q.options.size(); i++) {
-        cout << i + 1 << ". " << q.options[i] << endl;
+        std::cout << i + 1 << ". " << q.options[i] << std::endl;
     }
-    cout << "Your answer: ";
-    cin >> answer;
+    std::cout << "Your answer: ";
+    std::cin >> answer;
 
     if (answer - 1 == q.correct) {
-        cout << "Correct!\n";
+        std::cout << "Correct!\n";
         score++;
     }
     else {
-        cout << "Incorrect! The correct answer was " << q.options[q.correct] << ".\n";
+        std::cout << "Incorrect! The correct answer was " << q.options[q.correct] << ".\n";
     }
 }
 
 
-
-vector<Question> englishExam() {
+std::vector<Question> englishExam() {
     return {
          {"What is the capital of Spain?",
          {"a) Barcelona", "b) Madrid", "c) Seville", "d) Valencia"}, 1},
@@ -93,7 +91,7 @@ vector<Question> englishExam() {
          {"a) Oxygen", "b) Helium", "c) Nitrogen", "d) Nitrous oxide"}, 3}
     };
 };
-vector<Question> deutschExam() {
+std::vector<Question> deutschExam() {
     return {
           {"Was ist die Hauptstadt von Spanien?",
          {"a) Barcelona", "b) Madrid", "c) Sevilla", "d) Valencia"}, 1},
@@ -157,7 +155,7 @@ vector<Question> deutschExam() {
          {"a) Sauerstoff", "b) Helium", "c) Stickstoff", "d) Distickstoffoxid"}, 3}
     };
 };
-vector<Question>spanishExam() {
+std::vector<Question>spanishExam() {
     return {
        {"¿Cuál es la capital de España?",
          {"a) Barcelona", "b) Madrid", "c) Sevilla", "d) Valencia"}, 1},
@@ -226,229 +224,270 @@ vector<Question>spanishExam() {
 
 void displayBanner()
 {
-    cout << "   ___ _          _   __ _                       " << endl;
-    cout << "  / _ (_)_  _____| | / _\\ |_ ___  _ __ _ __ ___  " << endl;
-    cout << " / /_)/ \\ \\/ / _ \\ | \\ \\| __/ _ \\| '__| '_ ` _ \\ " << endl;
-    cout << "/ ___/| |>  <  __/ | _\\ \\ || (_) | |  | | | | | |" << endl;
-    cout << "\\/    |_/_/\\_\\___|_| \\__/\\__\\___/|_|  |_| |_| |_|" << endl;
+    std::cout << "   ___ _          _   __ _                       " << std::endl;
+    std::cout << "  / _ (_)_  _____| | / _\\ |_ ___  _ __ _ __ ___  " << std::endl;
+    std::cout << " / /_)/ \\ \\/ / _ \\ | \\ \\| __/ _ \\| '__| '_ ` _ \\ " << std::endl;
+    std::cout << "/ ___/| |>  <  __/ | _\\ \\ || (_) | |  | | | | | |" << std::endl;
+    std::cout << "\\/    |_/_/\\_\\___|_| \\__/\\__\\___/|_|  |_| |_| |_|" << std::endl;
 }
 
+
+
+
 int main() {
-    displayBanner();
 
-    vector<int> gradesEnglish;
-    vector<int> gradesDeutsch;
-    vector<int> gradesSpanish;
+    double  testGrade;
 
+    bool stopGame = true;
 
-
-    cout << "Enter your choice!" << endl;
-    cout << "1.Do a test" << endl;
-    cout << "2.Grade scale" << endl;
-    cout << "3.Exit" << endl;
+    std::vector<int> gradesEnglish;
+    std::vector<int> gradesDeutsch;
+    std::vector<int> gradesSpanish;
 
 
-    int choise;
-    cin >> choise;
+    do {
 
-    switch (choise) {
-        cout << "Enter your choice!" << endl;
-        cout << "1.Do a test" << endl;
-        cout << "2.Grade scale" << endl;
-        cout << "3.Exit" << endl;
-    case 1:
-    {
-        cout << "Enter your choice!" << endl;
-        cout << "1.English" << endl;
-        cout << "2.German" << endl;
-        cout << "3.Spanish" << endl;
-        cout << "4.Exit" << endl;
 
-        int languageChoice;
-        cin >> languageChoice;
 
-        // Create a random value
-        random_device seed;  // Get a random seed from the device
-        mt19937 gen(seed()); // MT generator
-        uniform_int_distribution<> distrib(1, 30); // Distribution from 1 to 100
+        displayBanner();
 
-        int questionIndex = distrib(gen); // Create a variable with the seed and the limitations set
+        std::cout << "Enter your choice!" << std::endl;
+        std::cout << "1.Do a test" << std::endl;
+        std::cout << "2.Grade scale" << std::endl;
+        std::cout << "3.Exit" << std::endl;
 
-        switch (languageChoice) {
-        case 1: {
-            int score = 0;
-            auto questions = englishExam();
 
-            if (questionIndex >= 0) {
+        int choise;
+        std::cin >> choise;
 
-                for (int i = 0; i < 1; i++)
+        switch (choise) {
+        case 1:
+        {
+            std::cout << "Enter your choice!" << std::endl;
+            std::cout << "1.English" << std::endl;
+            std::cout << "2.German" << std::endl;
+            std::cout << "3.Spanish" << std::endl;
+            std::cout << "4.Exit" << std::endl;
+
+            int languageChoice;
+            std::cin >> languageChoice;
+
+            // Create a random value
+            std::random_device seed;  // Get a random seed from the device
+            std::mt19937 gen(seed()); // MT generator
+            std::uniform_int_distribution<> distrib(0, 29); // Distribution from 0 to 29
+
+            int questionIndex = distrib(gen); // Create a variable with the seed and the limitations set
+
+            switch (languageChoice) {
+            case 1: {
+                int score = 0;
+                auto questions = englishExam();
+
+                for (int i = 0; i < 20; i++)
                 {
                     askQuestion(questions[questionIndex], score);
+                    std::cout << "Your score:" << score << std::endl;
+                    questionIndex = distrib(gen); // Get a new random question index for each question
+                }
+                
+                testGrade = score / 100 * 0.06;
+
+                if (testGrade > 2) {
+                    testGrade = 2;
+                }
+                
+                std::cout << std::endl << "Grade:" << testGrade << ", " << std::endl;
+
+                gradesEnglish.push_back(testGrade);
+
+                break;
+            }
+            case 2:
+            {
+                int score = 0;
+                auto questions = deutschExam();
+
+                for (int i = 0; i < 20; i++)
+                {
+                    askQuestion(questions[i], score);
+                    std::cout << "Your score:" << score << std::endl;
+                    questionIndex = distrib(gen); // Get a new random question index for each question
                 }
 
+                testGrade = score / 100 * 0.06;
+
+                if (testGrade > 2) {
+                    testGrade = 2;
+                }
+
+                std::cout << std::endl << "Grade:" << testGrade << ", " << std::endl;
+
+                gradesDeutsch.push_back(testGrade);
+
+                break;
             }
-
-            cout << endl << "Score: " << score << endl;
-
-            vector<int> gradesEnglish;
-
-            gradesEnglish.push_back(score);
-
             break;
+            case 3:
+            {
+                int score = 0;
+                auto questions = spanishExam();
+
+                for (int i = 0; i < 20; i++)
+                {
+                    askQuestion(questions[i], score);
+                    std::cout << "Your score:" << score << std::endl;
+                    questionIndex = distrib(gen); // Get a new random question index for each question
+                }
+
+                testGrade = score / 100 * 0.06;
+
+                if (testGrade > 2) {
+                    testGrade = 2;
+                }
+
+                std::cout << std::endl << "Grade:" << testGrade << ", " << std::endl;
+
+                gradesSpanish.push_back(testGrade);
+
+                break;
+            }
+            break;
+            case 4:
+            {
+                return 0;
+                break;
+            }
+            default:
+            {
+                std::cout << "Invalid choice!" << std::endl;
+                break;
+            }
+            }
         }
+
+        break;
+
         case 2:
         {
-            int score = 0;
-            auto questions = deutschExam();
+            std::cout << "Choose which subject do you want to review\n 1.English\n 2.Deutsch\n 3.Spanish\n 4.All subjects\n";
+            int chosenSubject;
+            std::cin >> chosenSubject;
 
-            for (int i = 0; i < 1; i++)
+            switch (chosenSubject) {
+            case 1:
             {
-                askQuestion(questions[i], score);
+                std::cout << "Your English grades are:";
+
+                for (int i = 0; i < gradesEnglish.size(); i++)
+                {
+                    std::cout << gradesEnglish[i] << " ";
+
+                }
+                std::cout << std::endl;
+
+                break;
+
             }
 
-            cout << endl << "Score: " << score << endl;
+            case 2:
+            {
+                std::cout << "Your Deutsch grades are:";
 
-            vector<int> gradesDeutsch;
+                for (int i = 0; i < gradesDeutsch.size(); i++)
+                {
+                    std::cout << gradesDeutsch[i] << ", ";
 
-            gradesDeutsch.push_back(score);
+                }
+                std::cout << std::endl;
 
-            break;
+                break;
+
+            }
+
+            case 3:
+            {
+                std::cout << "Your Spanish grades are:";
+
+                for (int i = 0; i < gradesSpanish.size(); i++)
+                {
+                    std::cout << gradesSpanish[i] << ", ";
+
+                }
+                std::cout << std::endl;
+
+                break;
+
+            }
+
+            case 4:
+            {
+                std::cout << "Your grades are:";
+
+                std::cout << "English:";
+
+                for (int i = 0; i < gradesEnglish.size(); i++)
+                {
+                    std::cout << gradesEnglish[i] << ", ";
+
+                }
+
+                std::cout << std::endl;
+
+
+
+
+                std::cout << "Deutsch:";
+
+                for (int i = 0; i < gradesDeutsch.size(); i++)
+                {
+                    std::cout << gradesDeutsch[i] << ", ";
+
+                }
+
+                std::cout << std::endl;
+
+
+
+
+                std::cout << "Spanish:";
+
+                for (int i = 0; i < gradesSpanish.size(); i++)
+                {
+                    std::cout << gradesSpanish[i] << ", ";
+
+                }
+                break;
+
+            }
+
+
+
+            default:
+            {
+                break;
+            }
+
+            }
+
         }
-        break;
         case 3:
-        {
-            int score = 0;
-            auto questions = spanishExam();
-
-            for (int i = 0; i < 1; i++)
-            {
-                askQuestion(questions[i], score);
-            }
-
-            cout << endl << "Score: " << score << endl;
-
-            vector<int> gradesSpanish;
-
-            gradesSpanish.push_back(score);
-
-            break;
-        }
-        break;
-        case 4:
         {
             return 0;
         }
-        default:
-        {
-            cout << "Invalid choice!" << endl;
-        }
-        }
-    }
-
-        break;
-
-    case 2:
-    {
-        cout << "Choose which subject do you want to review\n 1.English\n 2.Deutsch\n 3.Spanish\n 4.All subjects";
-        int chosenSubject;
-        cin >> chosenSubject;
-
-        switch (chosenSubject) {
-        case 1:
-        {
-            cout << "Your English grades are:";
-
-            for (int i = 0; i < gradesEnglish.size(); i++)
-            {
-                cout << gradesEnglish[i] << " ";
-
-            }
-
-        }
-
-        case 2:
-        {
-            cout << "Your Deutsch grades are:";
-
-            for (int i = 0; i < gradesDeutsch.size(); i++)
-            {
-                cout << gradesDeutsch[i] << " ";
-
-            }
-
-        }
-
-        case 3:
-        {
-            cout << "Your Spanish grades are:";
-
-            for (int i = 0; i < gradesSpanish.size(); i++)
-            {
-                cout << gradesSpanish[i] << " ";
-
-            }
-
-        }
-
-        case 4:
-        {
-            cout << "Your grades are:";
-
-            cout << "English:";
-
-            for (int i = 0; i < gradesEnglish.size(); i++)
-            {
-                cout << gradesEnglish[i] << " ";
-
-            }
-
-            cout << endl;
-
-            cout << "Deutsch:";
-
-            for (int i = 0; i < gradesDeutsch.size(); i++)
-            {
-                cout << gradesDeutsch[i] << " ";
-
-            }
-
-            cout << endl;
-
-            cout << "Spanish:";
-
-            for (int i = 0; i < gradesSpanish.size(); i++)
-            {
-                cout << gradesSpanish[i] << " ";
-
-            }
-            case 5:
-            {
-                continue;
-            }
-
-
-        }
-
-
 
         default:
-        {
+            std::cout << "Invalid option!";
             break;
         }
 
-        }
 
-    }
-    case 3:
-    {
-        return 0;
-        break;
-    }
 
-    default:
-        cout << "Invalid option!";
-        break;
-    }
+        std::cout << "Do you want to return to main menu?\n 0.Exit\n 1.Main Menu\n";
+        std::cin >> stopGame;
+
+    } while (stopGame != false);
+
     return 0;
-    
+
 }
