@@ -421,6 +421,10 @@ int main() {
                 cout << gradesSpanish[i] << " ";
 
             }
+            case 5:
+            {
+                continue;
+            }
 
 
         }

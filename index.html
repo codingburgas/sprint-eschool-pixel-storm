@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>14-0</title>
+</head>
+<body>
+    <button onclick="checkFruit()">Click Me</button>
+
+    <script>
+        function checkFruit() {
+            let fruits = prompt("Enter a fruit (banana or apple):").toLowerCase();
+
+            switch (fruits) {
+                case "banana":
+                    alert("Hello");
+                    break;
+
+                case "apple":
+                    alert("Welcome");
+                    break;
+
+                default:
+                    alert("No match found");
+            }
+        }
+    </script>
+
+</body>
+</html>
