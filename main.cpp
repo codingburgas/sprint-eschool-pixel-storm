@@ -1,32 +1,33 @@
 ﻿#include <iostream>
 #include <vector>
 #include <random>
-
+ 
+// Structure to store the questions
 struct Question {
     std::string text;
     std::vector<std::string> options;
     int correct;
 };
-
+ 
+// Function to choose a question and update the score based on the user's answer
 void askQuestion(Question q, int& score) {
-    int answer;
-    std::cout << q.text << std::endl;
-    for (size_t i = 0; i < q.options.size(); i++) {
-        std::cout << i + 1 << ". " << q.options[i] << std::endl;
+    int answer; // Variable to store the user's answer
+    std::cout << q.text << std::endl; // Show the question
+    for (size_t i = 0; i < q.options.size(); i++) { // Loop through the options
+        std::cout << i + 1 << ". " << q.options[i] << std::endl; // Show the options
     }
     std::cout << "Your answer: ";
     std::cin >> answer;
-
+ 
+    // Check if the answer is correct
     if (answer - 1 == q.correct) {
         std::cout << "Correct!\n";
         score++;
-    }
-    else {
-        std::cout << "Incorrect! The correct answer was " << q.options[q.correct] << ".\n";
+    } else {
+        std::cout << "Incorrect! The correct answer was " << q.options[q.correct] << ".\n"; // Show the correct answer
     }
 }
-
-
+ 
 std::vector<Question> englishExam() {
     return {
          {"What is the capital of Spain?",
@@ -218,10 +219,10 @@ std::vector<Question>spanishExam() {
         {"¿Qué gas es conocido como 'gas de la risa'?",
          {"a) Oxígeno", "b) Helio", "c) Nitrógeno", "d) Óxido nitroso"}, 3}
     };
-
-
+ 
+ 
 }
-
+ 
 void displayBanner()
 {
     std::cout << "   ___ _          _   __ _                       " << std::endl;
@@ -230,36 +231,39 @@ void displayBanner()
     std::cout << "/ ___/| |>  <  __/ | _\\ \\ || (_) | |  | | | | | |" << std::endl;
     std::cout << "\\/    |_/_/\\_\\___|_| \\__/\\__\\___/|_|  |_| |_| |_|" << std::endl;
 }
-
-
-
-
+ 
+ 
+ 
+ 
 int main() {
-
-    double  testGrade;
-
-    bool stopGame = true;
-
+ 
+    double  testGrade; // Variable to store the calculated test grade
+ 
+    bool stopGame = true; // Variable to control the game loop
+ 
+ 
+    // Vectors to store test grades
     std::vector<int> gradesEnglish;
     std::vector<int> gradesDeutsch;
     std::vector<int> gradesSpanish;
-
-
+ 
+ 
     do {
-
-
-
-        displayBanner();
-
+ 
+ 
+ 
+        displayBanner(); // Display the banner
+ 
         std::cout << "Enter your choice!" << std::endl;
         std::cout << "1.Do a test" << std::endl;
         std::cout << "2.Grade scale" << std::endl;
         std::cout << "3.Exit" << std::endl;
-
-
+ 
+ 
+        // User's choice
         int choise;
         std::cin >> choise;
-
+ 
         switch (choise) {
         case 1:
         {
@@ -268,226 +272,250 @@ int main() {
             std::cout << "2.German" << std::endl;
             std::cout << "3.Spanish" << std::endl;
             std::cout << "4.Exit" << std::endl;
-
+ 
+            //Choose the language
             int languageChoice;
             std::cin >> languageChoice;
-
+ 
             // Create a random value
-            std::random_device seed;  // Get a random seed from the device
-            std::mt19937 gen(seed()); // MT generator
+            std::random_device seed;  // Obtain a seed for the random number engine
+            std::mt19937 gen(seed()); // Mersenne Twister that uses the seed            
             std::uniform_int_distribution<> distrib(0, 29); // Distribution from 0 to 29
-
+ 
             int questionIndex = distrib(gen); // Create a variable with the seed and the limitations set
-
+ 
             switch (languageChoice) {
             case 1: {
-                int score = 0;
-                auto questions = englishExam();
-
+                int score = 0; // Variable to count the score
+                auto questions = englishExam(); // Get the questions
+ 
                 for (int i = 0; i < 20; i++)
                 {
-                    askQuestion(questions[questionIndex], score);
-                    std::cout << "Your score:" << score << std::endl;
+                    askQuestion(questions[questionIndex], score); // Ask the question
+                    std::cout << "Your score:" << score << std::endl; // Show the score
                     questionIndex = distrib(gen); // Get a new random question index for each question
                 }
-                
-                testGrade = score / 100 * 0.06;
-
-                if (testGrade > 2) {
+               
+                testGrade = score / 100 * 0.06; // Calculate the test grade
+ 
+ 
+                // Check if the grade is higher than 2 or if it is 6
+                if (testGrade < 3) {
                     testGrade = 2;
                 }
-                
-                std::cout << std::endl << "Grade:" << testGrade << ", " << std::endl;
-
-                gradesEnglish.push_back(testGrade);
-
+                else if (testGrade > 5.50) {
+                    testGrade = 6;
+                }
+               
+                std::cout << std::endl << "Grade:" << testGrade << ", " << std::endl; // Show grade
+ 
+                gradesEnglish.push_back(testGrade); // Add the grade to the end of the vector
+ 
                 break;
             }
             case 2:
             {
-                int score = 0;
-                auto questions = deutschExam();
-
+                int score = 0; // Variable to count the score
+                auto questions = deutschExam(); // Get the questions
+ 
                 for (int i = 0; i < 20; i++)
                 {
-                    askQuestion(questions[i], score);
-                    std::cout << "Your score:" << score << std::endl;
+                    askQuestion(questions[i], score); // Ask the question
+                    std::cout << "Your score:" << score << std::endl; // Show the score
                     questionIndex = distrib(gen); // Get a new random question index for each question
                 }
-
-                testGrade = score / 100 * 0.06;
-
-                if (testGrade > 2) {
+ 
+                testGrade = score / 100 * 0.06; // Calculate the test grade
+ 
+                // Check if the grade is higher than 2 or if it is 6
+                if (testGrade < 3) {
                     testGrade = 2;
                 }
-
-                std::cout << std::endl << "Grade:" << testGrade << ", " << std::endl;
-
-                gradesDeutsch.push_back(testGrade);
-
+                else if (testGrade > 5.50) {
+                    testGrade = 6;
+                }
+ 
+                std::cout << std::endl << "Grade:" << testGrade << ", " << std::endl; // Show grade
+ 
+                gradesDeutsch.push_back(testGrade); // Add the grade to the end of the vector
+ 
                 break;
             }
             break;
             case 3:
             {
-                int score = 0;
-                auto questions = spanishExam();
-
+                int score = 0; // Variable to count the score
+                auto questions = spanishExam(); // Get the questions
+ 
                 for (int i = 0; i < 20; i++)
                 {
-                    askQuestion(questions[i], score);
-                    std::cout << "Your score:" << score << std::endl;
+                    askQuestion(questions[i], score); // Ask the question
+                    std::cout << "Your score:" << score << std::endl; // Show the score
                     questionIndex = distrib(gen); // Get a new random question index for each question
                 }
-
-                testGrade = score / 100 * 0.06;
-
-                if (testGrade > 2) {
+ 
+                testGrade = score / 100 * 0.06; // Calculate the test grade
+ 
+                // Check if the grade is higher than 2 or if it is 6
+                if (testGrade < 3) {
                     testGrade = 2;
                 }
-
-                std::cout << std::endl << "Grade:" << testGrade << ", " << std::endl;
-
-                gradesSpanish.push_back(testGrade);
-
+                else if (testGrade > 5.50) {
+                    testGrade = 6;
+                }
+ 
+                std::cout << std::endl << "Grade:" << testGrade << ", " << std::endl; // Show grade
+ 
+                gradesSpanish.push_back(testGrade); // Add the grade to the end of the vector
+ 
                 break;
             }
             break;
             case 4:
             {
-                return 0;
-                break;
+                return 0; // Exit the program
             }
             default:
             {
-                std::cout << "Invalid choice!" << std::endl;
+                std::cout << "Invalid choice!" << std::endl; // Show an error message
                 break;
             }
             }
         }
-
+ 
         break;
-
+ 
         case 2:
         {
             std::cout << "Choose which subject do you want to review\n 1.English\n 2.Deutsch\n 3.Spanish\n 4.All subjects\n";
-            int chosenSubject;
-            std::cin >> chosenSubject;
-
+            int chosenSubject; // Variable to store the chosen subject
+            std::cin >> chosenSubject; // Get the chosen subject
+ 
             switch (chosenSubject) {
             case 1:
             {
                 std::cout << "Your English grades are:";
-
+ 
+                // Loop through the vector and show the grades
+ 
                 for (int i = 0; i < gradesEnglish.size(); i++)
                 {
                     std::cout << gradesEnglish[i] << " ";
-
+ 
                 }
                 std::cout << std::endl;
-
+ 
                 break;
-
+ 
             }
-
+ 
             case 2:
             {
                 std::cout << "Your Deutsch grades are:";
-
+ 
+                // Loop through the vector and show the grades
+ 
                 for (int i = 0; i < gradesDeutsch.size(); i++)
                 {
                     std::cout << gradesDeutsch[i] << ", ";
-
+ 
                 }
                 std::cout << std::endl;
-
+ 
                 break;
-
+ 
             }
-
+ 
             case 3:
             {
                 std::cout << "Your Spanish grades are:";
-
+ 
+                // Loop through the vector and show the grades
+ 
                 for (int i = 0; i < gradesSpanish.size(); i++)
                 {
                     std::cout << gradesSpanish[i] << ", ";
-
+ 
                 }
                 std::cout << std::endl;
-
+ 
                 break;
-
+ 
             }
-
+ 
             case 4:
             {
                 std::cout << "Your grades are:";
-
+ 
                 std::cout << "English:";
-
+ 
+                // Loop through the vector and show the grades
+ 
                 for (int i = 0; i < gradesEnglish.size(); i++)
                 {
                     std::cout << gradesEnglish[i] << ", ";
-
+ 
                 }
-
+ 
                 std::cout << std::endl;
-
-
-
-
+ 
+ 
+ 
+ 
                 std::cout << "Deutsch:";
-
+ 
+                // Loop through the vector and show the grades
+ 
                 for (int i = 0; i < gradesDeutsch.size(); i++)
                 {
                     std::cout << gradesDeutsch[i] << ", ";
-
+ 
                 }
-
+ 
                 std::cout << std::endl;
-
-
-
-
+ 
+ 
+ 
+ 
                 std::cout << "Spanish:";
-
+ 
+                // Loop through the vector and show the grades
+ 
                 for (int i = 0; i < gradesSpanish.size(); i++)
                 {
                     std::cout << gradesSpanish[i] << ", ";
-
+ 
                 }
                 break;
-
+ 
             }
-
-
-
+ 
+ 
+ 
             default:
             {
                 break;
             }
-
+ 
             }
-
+ 
         }
         case 3:
         {
-            return 0;
+            return 0; // Exit the program
         }
-
+ 
         default:
-            std::cout << "Invalid option!";
+            std::cout << "Invalid option!"; // Show an error message
             break;
         }
-
-
-
+ 
+        // Ask the user if they want to return to the main menu
         std::cout << "Do you want to return to main menu?\n 0.Exit\n 1.Main Menu\n";
         std::cin >> stopGame;
-
-    } while (stopGame != false);
-
-    return 0;
-
+ 
+    } while (stopGame != false); // Loop until the user chooses to exit
+ 
+    return 0; // Exit the program
+ 
 }
